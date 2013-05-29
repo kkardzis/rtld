@@ -1,0 +1,43 @@
+name:           rtld
+version:        0.0.0-dev
+synopsis:       dynamic linker tools
+author:         Krzysztof Kardzis <kkardzis@gmail.com>
+maintainer:     Krzysztof Kardzis <kkardzis@gmail.com>
+copyright:      Copyright © 2012-2013 Krzysztof Kardzis
+-- license:     ISC License (MIT/BSD-style, see LICENSE file for details)
+license:        OtherLicense
+license-file:   LICENSE
+category:       System
+stability:      Experimental
+build-type:     Simple
+cabal-version:  >=1.6
+tested-with:    GHC ==7.4.1
+
+description:
+  Package @rtld@ provides a simple interface to the dynamic linker. 
+  .
+  Package is distributed under ISC License (MIT/BSD-style, see LICENSE file
+  for details). It is marked as @OtherLicense@ due to limitations of Cabal.
+
+extra-source-files:
+  README
+
+library
+  ghc-options:      -Wall -fwarn-tabs
+  build-depends:    base
+  exposed-modules:  System.RTLD
+  install-includes: RTLD.h
+  include-dirs:     System
+
+  if os(windows)
+    cpp-options: -DWINRTLD
+
+  if os(macosx)
+    cpp-options: -DOSXRTLD
+
+  if os(linux)
+    cpp-options: -DGNURTLD
+
+  if os(freebsd)
+    cpp-options: -DBSDRTLD
+
