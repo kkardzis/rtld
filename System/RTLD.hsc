@@ -28,8 +28,10 @@ import Foreign.C.Types
 import Foreign.Ptr
 import Foreign.Storable
 import Foreign.Marshal.Array
-import Foreign.Marshal.Alloc (alloca)
 import Foreign.Marshal.Utils (toBool)
+#ifdef WINRTLD
+import Foreign.Marshal.Alloc (alloca)
+#endif
 
 import Control.Concurrent (MVar, modifyMVar_)
 import Control.Exception  (bracket_, bracketOnError)
@@ -122,7 +124,7 @@ dynfunc :: LIBH -> Ptr CChar -> IO (FunPtr ())
 dynfunc = dlsym
 
 dynfree :: LIBH -> IO Bool
-dynfree hm = fmap toBool (dlclose hm)
+dynfree hm = fmap (not . toBool) (dlclose hm)
 
 dynfail :: IO String
 dynfail = dlerror >>= peekCString
