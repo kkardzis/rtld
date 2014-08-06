@@ -109,11 +109,10 @@ foreign import stdcall "FormatMessageA"
 foreign import stdcall "LocalFree"
   localFree :: HLOCAL -> IO HLOCAL
 
-#endif
 
 
 -------------------------------------------------------------------------------
-#ifdef BSDRTLD
+#else
 
 #include <dlfcn.h>
 
