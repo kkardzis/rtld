@@ -125,41 +125,41 @@ typedef struct {int vmin; int vmax; char* name;} SYMTABENTRY;
 /* constant import macros (for hsc2hs)                                       */
 /* ------------------------------------------------------------------------- */
 
-#define hsc_ENUM(type, ...)                          \
-  printf("data " #type "\n");                        \
-  { char *x, xs[] = #__VA_ARGS__;                    \
-    printf("  = %s\n", strtok(xs,","));              \
-    while ((x=strtok(NULL,",")) != NULL) {           \
-      printf("  |%s\n", x);                          \
-    };                                               \
-  };                                                 \
-  printf("\n");                                      \
-  printf("instance ENUM " #type " where\n");         \
-  printf("  enumlist = [ " #__VA_ARGS__ " ]\n");     \
-  printf("  toENUM x = case x of\n");                \
-  { char *x, xs[] = #__VA_ARGS__;                    \
-    int i=1, vs[] = {__VA_ARGS__};                   \
-    printf("    %s -> %d\n", strtok(xs,","), vs[0]); \
-    while ((x=strtok(NULL,",")) != NULL) {           \
-      printf("   %s -> %d\n", x, vs[i++]);           \
-    };                                               \
-  };                                                 \
+#define hsc_ENUM(type, ...)                            \
+  printf("data " #type "\n");                          \
+  { char *x, xs[] = #__VA_ARGS__;                      \
+    printf("  = %s\n", strtok(xs,","));                \
+    while ((x=strtok(NULL,",")) != NULL) {             \
+      printf("  |%s\n", x);                            \
+    };                                                 \
+  };                                                   \
+  printf("\n");                                        \
+  printf("instance ENUM " #type " where\n");           \
+  printf("  enumlist = [ " #__VA_ARGS__ " ]\n");       \
+  printf("  toENUM x = case x of\n");                  \
+  { char  *x, xs[] = #__VA_ARGS__;                     \
+    long long vs[] = {__VA_ARGS__}; int i=1;           \
+    printf("    %s -> %lld\n", strtok(xs,","), vs[0]); \
+    while ((x=strtok(NULL,",")) != NULL) {             \
+      printf("   %s -> %lld\n", x, vs[i++]);           \
+    };                                                 \
+  };                                                   \
 
-#define hsc_GADT(type, ...)                                          \
-  printf("data " #type " where\n");                                  \
-  { int i=0; struct {int v; char *s;} vs[] = {__VA_ARGS__};          \
-    char xs[] = #__VA_ARGS__; char *x = strtok(xs,",");              \
-    do { printf("  %s :: %s\n", x+1, vs[i++].s); strtok(NULL,",");   \
-    } while ((x=strtok(NULL,",")) != NULL);                          \
-  };                                                                 \
-  printf("\ninstance ENUM (" #type ") where\n");                     \
-  printf("  enumlist = []\n");                                       \
-  printf("  toENUM x = case x of\n");                                \
-  { int i=0; struct {int v; char *s;} vs[] = {__VA_ARGS__};          \
-    char xs[] = #__VA_ARGS__; char *x = strtok(xs,",");              \
-    do { printf("    %s -> %d\n", x+1, vs[i++].v); strtok(NULL,","); \
-    } while ((x=strtok(NULL,",")) != NULL);                          \
-  };                                                                 \
+#define hsc_GADT(type, ...)                                            \
+  printf("data " #type " where\n");                                    \
+  { int i=0; struct {int v; char *s;} vs[] = {__VA_ARGS__};            \
+    char xs[] = #__VA_ARGS__; char *x = strtok(xs,",");                \
+    do { printf("  %s :: %s\n", x+1, vs[i++].s); strtok(NULL,",");     \
+    } while ((x=strtok(NULL,",")) != NULL);                            \
+  };                                                                   \
+  printf("\ninstance ENUM (" #type ") where\n");                       \
+  printf("  enumlist = []\n");                                         \
+  printf("  toENUM x = case x of\n");                                  \
+  { int i=0; struct {long long v; char *s;} vs[] = {__VA_ARGS__};      \
+    char xs[] = #__VA_ARGS__; char *x = strtok(xs,",");                \
+    do { printf("    %s -> %lld\n", x+1, vs[i++].v); strtok(NULL,","); \
+    } while ((x=strtok(NULL,",")) != NULL);                            \
+  };                                                                   \
 
 #define T4(x) "(" #x ", " #x ", " #x ", " #x ")"
 #define T3(x) "(" #x ", " #x ", " #x ")"
