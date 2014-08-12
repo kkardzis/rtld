@@ -39,8 +39,6 @@ import Control.Monad      (when, void, foldM)
 
 #include "RTLD.h"
 
-#{let alignof type = "(%ld)", (long) offsetof (struct {char x; type y;}, y)}
-
 
 -------------------------------------------------------------------------------
 class RTLD so where

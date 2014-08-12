@@ -10,9 +10,12 @@
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
+#include <string.h>
+#include <stdio.h>
+
 
 /* ------------------------------------------------------------------------- */
-/*                                                                           */
+/* SYMTABENTRY structure and some macros (for hsc2hs)                        */
 /* ------------------------------------------------------------------------- */
 typedef struct {int vmin; int vmax; char* name;} SYMTABENTRY;
 
@@ -26,6 +29,9 @@ typedef struct {int vmin; int vmax; char* name;} SYMTABENTRY;
       };                                        \
     };                                          \
   }
+
+#define hsc_alignof(type) \
+  printf("(%ld)", (long) offsetof (struct {char x; type y;}, y));
 
 
 /* ------------------------------------------------------------------------- */
