@@ -1,26 +1,31 @@
-name:           rtld
-version:        0.0.0-dev
-synopsis:       dynamic linker tools
-author:         Krzysztof Kardzis <kkardzis@gmail.com>
-maintainer:     Krzysztof Kardzis <kkardzis@gmail.com>
-copyright:      Copyright © 2012-2014 Krzysztof Kardzis
--- license:     ISC License (MIT/BSD-style, see LICENSE file for details)
-license:        OtherLicense
-license-file:   LICENSE
-category:       System
-stability:      Experimental
-build-type:     Simple
-cabal-version:  >=1.6
-tested-with:    GHC ==7.6.3
+name:          rtld
+version:       0.0.0-dev
+synopsis:      dynamic linker tools for Haskell
+author:        Krzysztof Kardzis <kkardzis@gmail.com>
+maintainer:    Krzysztof Kardzis <kkardzis@gmail.com>
+copyright:     Copyright © 2012-2014 Krzysztof Kardzis
+-- license:    ISC License (MIT/BSD-style, see LICENSE file for details)
+license:       OtherLicense
+license-file:  LICENSE
+category:      System
+stability:     Experimental
+build-type:    Simple
+cabal-version: >=1.6
+homepage:      https://github.com/kkardzis/rtld
 
 description:
-  Package @rtld@ provides a simple interface to the dynamic linker. 
+  Package @rtld@ provides simplistic interface to the dynamic linker/loader.
+  It wraps 'dlopen/dlclose' family of functions ('LoadLibrary/FreeLibrary'
+  on Windows) and tries to provide a common interface to dynamically load
+  foreign libraries at runtime. It is used currently as a helper package
+  for @curlhs@ (<http://hackage.haskell.org/package/curlhs>), but is not
+  ready for the public use (more tests and design decisions needed).
   .
   Package is distributed under ISC License (MIT/BSD-style, see LICENSE file
   for details). It is marked as @OtherLicense@ due to limitations of Cabal.
 
 extra-source-files:
-  README
+  README.md
 
 library
   ghc-options:      -Wall -fwarn-tabs
@@ -40,4 +45,8 @@ library
 
   if os(freebsd)
     cpp-options: -DBSDRTLD
+
+source-repository head
+  location: https://github.com/kkardzis/rtld
+  type:     git
 
