@@ -1,5 +1,5 @@
 name:          rtld
-version:       0.0.1
+version:       0.0.2
 synopsis:      dynamic linker tools for Haskell
 author:        Krzysztof Kardzis <kkardzis@gmail.com>
 maintainer:    Krzysztof Kardzis <kkardzis@gmail.com>
@@ -31,7 +31,7 @@ extra-source-files:
 
 library
   ghc-options:      -Wall -fwarn-tabs
-  build-depends:    base
+  build-depends:    base ==4.*
   exposed-modules:  System.RTLD
   install-includes: RTLD.h
   include-dirs:     System
@@ -39,7 +39,7 @@ library
   if os(windows)
     cpp-options: -DWINRTLD
 
-  if os(macosx)
+  if os(OSX)
     cpp-options: -DOSXRTLD
 
   if os(linux)
