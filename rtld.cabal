@@ -1,5 +1,5 @@
 name:          rtld
-version:       0.0.0-dev
+version:       0.0.1
 synopsis:      dynamic linker tools for Haskell
 author:        Krzysztof Kardzis <kkardzis@gmail.com>
 maintainer:    Krzysztof Kardzis <kkardzis@gmail.com>
