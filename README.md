@@ -5,7 +5,7 @@ Dynamic linker tools for Haskell.
 
 [![Analytics][ga.img]][ga.htm]
 
-[ga.img]: https://ga-beacon.appspot.com/UA-53767359-1/rtld/readme
+[ga.img]: https://ga-beacon.appspot.com/UA-53767359-1/github/rtld
 [ga.htm]: https://github.com/igrigorik/ga-beacon
 
 [travis.img]: https://travis-ci.org/kkardzis/rtld.svg
